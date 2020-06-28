@@ -31,14 +31,27 @@
         \label{fig:chap4_onde_implementar_cpa}
     \end{figure}
     
+    Sempre que houver uma embarcação nas proximidades do USV, o sistema base cria obstáculos artificiais no mapa de custo do planejador local para induzi-lo a realizar uma manobra de evasão em conformidade com as regulamentações de prevenção de colisões no mar (do inglês \textit{"COLision REGulations at Sea" - COLREGS}. Como o ponto de maior proximidade (do inglês \textit{"Closest Point of Approach"} - CPA) 
+    é um método para mensurar o índice do risco de colisão (do inglês \textit{"Collision Risk Index"} - CRI), concluímos que o CPA deveria ser avaliado antes de realizar a criação dos obstáculos virtuais, pois se não há risco de colisão os obstáculos virtuais não devem ser criados.
     
-    
+    O fluxograma inicial (antes de implementação do CPA) da rotina que realiza a criação dos obstáculos virtuais é apresentado pela Figura~\ref{fig:chap4_fluxograma_inicial}. Inicialmente, é verificado a validade do objetivo recebido do nodo \textit{"mission planner"}. Se o objetivo atual e o objetivo anterior a este forem inválidos, o sistema não fará nada. Porém, se o objetivo atual for inválido mas o anterior a este for válido, o sistema deverá utilizar o último comando de velocidade gerado. 
+    Já se o objetivo atual for válido e não houver nenhuma embarcação nos arredores do USV, o sistema planejará a rota local e gerará os comandos de velocidade. Contudo, se o objetivo atual for válido e houver uma embarcação nas proximidades do USV, o sistema criará obstáculos virtuais no mapa de custo do planejador local, planejará a rota possível e então gerará os comandos de velocidade.
     
     \begin{figure}
         \centering
         \includegraphics{fig/chap4/find_best_path_diagram_no_cpa.pdf}
         \caption{Fluxograma inicial da rotina onde o CPA foi adicionado.}
         \label{fig:chap4_fluxograma_inicial}
+    \end{figure}
+    
+    A implementação do CPA fez uso das informações de posição e velocidade das embarcações envolvidas no encontro. Essas informações já eram utilizadas na rotina que cria os obstáculos virtuais, sendo necessário apenas transmitir essas informações através de parâmetros para a rotina que realizará o cálculo do CPA. 
+    
+    
+    \begin{figure}
+        \centering
+        \includegraphics{}
+        \caption{Caption}
+        \label{fig:my_label}
     \end{figure}
     
     \begin{figure}
