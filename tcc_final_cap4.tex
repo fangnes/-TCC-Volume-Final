@@ -45,6 +45,20 @@
     \end{figure}
     
     A implementação do CPA fez uso das informações de posição e velocidade das embarcações envolvidas no encontro. Essas informações já eram utilizadas na rotina que cria os obstáculos virtuais, sendo necessário apenas transmitir essas informações através de parâmetros para a rotina que realizará o cálculo do CPA. A Figura~\ref{fig:chap4_fluxograma_cpa} apresenta o fluxograma da rotina que implementa o CPA. 
+    Inicialmente, se $\Vert\vec{v}_{A}-\vec{v}_{B}\Vert\leq\epsilon$ então o \tcpa é considerado zero. Caso contrário, o \tcpa é calculado de acordo com a Equação~\ref{eq:chap4_tcpa}. Após isso, é realizado o cálculo do \dcpa de acordo com a Equação~\ref{eq:chap4_dcpa}. 
+    
+    \begin{equation}
+        t_{\rm CPA} = \frac{(\vec{p}_{A}-\vec{p}_{B})\cdot(\vec{v}_{A}-\vec{v}_{B})}{\Vert\vec{v}_{A}-\vec{v}_{B}\Vert^{2}}
+        \label{eq:chap4_tcpa}
+    \end{equation}
+    
+    \begin{equation}
+        d_{\rm CPA} =\bigl\Vert (\vec{p}_{A}+\vec{v}_{A}t_{\rm CPA})-(\vec{p}_{B}+\vec{v}_{B}t_{\rm CPA})\bigr\Vert\label{eq:chap4_dcpa}
+    \end{equation}
+        
+    \begin{equation}\label{eq:chap4_cpaThreshold}
+        0\leq t_{\rm CPA}\leq t_{\max}\quad{\hbox {and}}\quad d_{\rm CPA}\leq d_{\min}
+    \end{equation}
     
     \begin{figure}
         \centering
