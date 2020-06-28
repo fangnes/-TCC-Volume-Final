@@ -10,25 +10,25 @@
     % - Falar sobre o que foi feito para a coleta dos resultados
     %   - Criação dos tópicos para publicar t_cpa e d_cpa
     
-    O desenvolvimento deste trabalho resume-se à implementação da Equação~\ref{eq:tcpa} e da Equação~\ref{eq:dcpa}.\frm{Se eu bem me recordo, tu tiveste que mexer em bem mais coisas para fazer tudo rodar, não? Eu diria que esta frase vende teu trabalho barato... Tenta explicar que tu tiveste que tunar parâmetros também...} 
-    Obtendo os valores resultantes, aplica-se a Desigualdade~\ref{eq:cpaThreshold} para determinar se há risco de colisão ou não. Para tal, usou-se informações referente à posições e velocidades das embarcações que já estavam disponíveis no sistema base. Além disso foi preciso identificar onde, no sistema desenvolvido por Jurak~\cite{Jurak2020COLREGS}, a implementação do ponto de maior proximidade (do inglês \textit{"Closest Point of Approach"} - CPA) seria realizada, para que implementação e integração ocorressem paralelamente. 
-    Como citado no Capítulo~\ref{subchap3:sistema_base}, o sistema base cria obstáculos artificiais para fazer com que seu planejador local encontre uma rota que seja compatível com as COLREGS. 
-    Logo, identificamos que os obstáculos virtuais deveriam ser criados somente quando houver risco de colisão, caso contrário os obstáculos virtuais não devem ser criados. 
-    A Figura~\ref{fig:chap4_fluxograma_inicial} apresenta o fluxograma da rotina onde os obstáculos virtuais são criados antes da implementação do CPA. 
-    Com base no fluxograma apresentado, chegamos a conclusão que a implementação do CPA deveria ser realizada no momento anterior à criação dos obstáculos virtuais. 
-    A Figura~\ref{fig:chap4_fluxograma_final} apresenta o fluxograma da rotina onde os obstáculos virtuais são criados após a implementação do CPA. 
-    Para fins de análise, foi adicionado no sistema base dois tópicos para a publicação do \tcpa e do \dcpa encontrados. Essas informações foram coletadas dos tópicos criados durante as execuções dos testes e gravadas em um arquivo \textit{".bag"}. As informações coletadas serão apresentadas no Capítulo~\ref{chap5:resultados}.
+    %O desenvolvimento deste trabalho resume-se à implementação da Equação~\ref{eq:tcpa} e da Equação~\ref{eq:dcpa}.\frm{Se eu bem me recordo, tu tiveste que mexer em bem mais coisas para fazer tudo rodar, não? Eu diria que esta frase vende teu trabalho barato... Tenta explicar que tu tiveste que tunar parâmetros também...} 
+    %Obtendo os valores resultantes, aplica-se a Desigualdade~\ref{eq:cpaThreshold} para determinar se há risco de colisão ou não. Para tal, usou-se informações referente à posições e velocidades das embarcações que já estavam disponíveis no sistema base. Além disso foi preciso identificar onde, no sistema desenvolvido por Jurak~\cite{Jurak2020COLREGS}, a implementação do ponto de maior proximidade (do inglês \textit{"Closest Point of Approach"} - CPA) seria realizada, para que implementação e integração ocorressem paralelamente. 
+    %Como citado no Capítulo~\ref{subchap3:sistema_base}, o sistema base cria obstáculos artificiais para fazer com que seu planejador local encontre uma rota que seja compatível com as COLREGS. 
+    %Logo, identificamos que os obstáculos virtuais deveriam ser criados somente quando houver risco de colisão, caso contrário os obstáculos virtuais não devem ser criados. 
+    %A Figura~\ref{fig:chap4_fluxograma_inicial} apresenta o fluxograma da rotina onde os obstáculos virtuais são criados antes da implementação do CPA. 
+    %Com base no fluxograma apresentado, chegamos a conclusão que a implementação do CPA deveria ser realizada no momento anterior à criação dos obstáculos virtuais. 
+    %A Figura~\ref{fig:chap4_fluxograma_final} apresenta o fluxograma da rotina onde os obstáculos virtuais são criados após a implementação do CPA. 
+    %Para fins de análise, foi adicionado no sistema base dois tópicos para a publicação do \tcpa e do \dcpa encontrados. Essas informações foram coletadas dos tópicos criados durante as execuções dos testes e gravadas em um arquivo \textit{".bag"}. As informações coletadas serão apresentadas no Capítulo~\ref{chap5:resultados}.
     
     
     
-    Dado que o objetivo deste trabalho é capacitar o sistema base a avaliar as posições futuras das embarcações envolvidas em um encontro para identificar um risco de colisão, nossa implementação se dará no mecanismo de comportamento reativo do sistema base. Como explicado anteriormente, o comportamento reativo de um sistema para veículos de superfície não tripulados (do inglês \textit{"Unmanned Surface Vehicle"} - USV) é responsabilidade do planejador local~\cite{Jurak2020COLREGS}. Com isso, reapresentamos na 
+    Dado que o objetivo deste trabalho é capacitar o sistema base a avaliar as posições futuras das embarcações envolvidas em um encontro para identificar um risco de colisão, nossa implementação se dará no mecanismo de comportamento reativo do sistema base. Como explicado anteriormente, o comportamento reativo de um sistema para veículos de superfície não tripulados (do inglês \textit{"Unmanned Surface Vehicle"} - USV) é responsabilidade do planejador local~\cite{Jurak2020COLREGS}. Com isso, reapresentamos a arquitetura do sistema baes na Figura~\ref{fig:chap4_onde_implementar_cpa} indicando onde realizaremos a implementação do CPA.
     
     
     \begin{figure}
         \centering
-        \includegraphics{fig/cha}
-        \caption{Caption}
-        \label{fig:my_label}
+        \includegraphics{fig/chap4/onde_implementar_cpa.pdf}
+        \caption{Indicação na arquitetura base de onde será realizada a implementação}
+        \label{fig:chap4_onde_implementar_cpa}
     \end{figure}
     
     
