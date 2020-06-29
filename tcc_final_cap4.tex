@@ -45,7 +45,7 @@
     \end{figure}
     
     A implementação do CPA fez uso das informações de posição e velocidade das embarcações envolvidas no encontro. Essas informações já eram utilizadas na rotina que cria os obstáculos virtuais, sendo necessário apenas transmitir essas informações através de parâmetros para a rotina que realizará o cálculo do CPA. A Figura~\ref{fig:chap4_fluxograma_cpa} apresenta o fluxograma da rotina que implementa o CPA. 
-    Inicialmente, se $\Vert\vec{v}_{A}-\vec{v}_{B}\Vert\leq\epsilon$ então o \tcpa é considerado zero. Caso contrário, o \tcpa é calculado de acordo com a Equação~\ref{eq:chap4_tcpa}. Após isso, é realizado o cálculo do \dcpa de acordo com a Equação~\ref{eq:chap4_dcpa}. 
+    Inicialmente, se $\Vert\vec{v}_{A}-\vec{v}_{B}\Vert\leq\epsilon$ então o \tcpa é considerado zero. Caso contrário, o \tcpa é calculado de acordo com a Equação~\ref{eq:chap4_tcpa}. Após isso, é realizado o cálculo do \dcpa de acordo com a Equação~\ref{eq:chap4_dcpa}. Se os valores calculados satisfizerem a Desigualdade~\ref{eq:chap4_cpaThreshold} então um risco de colisão é identificado, caso contrário não há risco de colisão para o encontro atual.
     
     \begin{equation}
         t_{\rm CPA} = \frac{(\vec{p}_{A}-\vec{p}_{B})\cdot(\vec{v}_{A}-\vec{v}_{B})}{\Vert\vec{v}_{A}-\vec{v}_{B}\Vert^{2}}
@@ -53,19 +53,25 @@
     \end{equation}
     
     \begin{equation}
-        d_{\rm CPA} =\bigl\Vert (\vec{p}_{A}+\vec{v}_{A}t_{\rm CPA})-(\vec{p}_{B}+\vec{v}_{B}t_{\rm CPA})\bigr\Vert\label{eq:chap4_dcpa}
+        d_{\rm CPA} =\bigl\Vert (\vec{p}_{A}+\vec{v}_{A}t_{\rm CPA})-(\vec{p}_{B}+\vec{v}_{B}t_{\rm CPA})\bigr\Vert
+        \label{eq:chap4_dcpa}
     \end{equation}
         
-    \begin{equation}\label{eq:chap4_cpaThreshold}
-        0\leq t_{\rm CPA}\leq t_{\max}\quad{\hbox {and}}\quad d_{\rm CPA}\leq d_{\min}
+    \begin{equation}
+        0\leq t_{\rm CPA}\leq t_{\max} \land d_{\rm CPA}\leq d_{\min}
+        \label{eq:chap4_cpaThreshold}
     \end{equation}
     
-    \begin{figure}
+    Após uma primeira implementação do CPA, realizou-se testes para definir empiricamente os valores de $t_{\max}$ e $d_{\min}$. Dado que não dispomos de uma modelagem matemática capaz de descrever a dinâmica do USV, executamos testes verificando o comportamento do sistema para os diferentes valores de $t_{\max}$ e $d_{\min}$ considerados. O mesmo se aplica para o valor definido para o $\epsilon$, realizamos testes observando os momentos em que o resultado da operação $\Vert\vec{v}_{A}-\vec{v}_{B}\Vert$ se tornava pequeno o suficiente para degradar o funcionamento do sistema. Com isso, concluímos que os valores adequados seriam $t_{\max} = 20$, $d_{\min} = 9$ e $\epsilon = 0.35$. A Figura~\ref{fig:chap4_fluxograma_cpa} apresenta o fluxograma da rotina que realiza a criação dos obstáculos virtuais após a implementação do CPA.
+    
+    \begin{figure}[H]
         \centering
         \includegraphics{fig/chap4/fluxograma_cpa.pdf}
         \caption{Fluxograma da rotina que implementa o CPA}
         \label{fig:chap4_fluxograma_cpa}
     \end{figure}
+    
+    
     
     \begin{figure}
         \centering
